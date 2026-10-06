@@ -3,26 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>AI Music Generator</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #09090f;
+      color: white;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .badge {
+      background: #191922;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 52px;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      color: #aaa;
+      font-size: 18px;
+      margin-bottom: 40px;
+    }
+
+    .box {
+      background: #111119;
+      border: 1px solid #292936;
+      border-radius: 20px;
+      padding: 25px;
+      text-align: left;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      background: #08080d;
+      color: white;
+      border: 1px solid #30303d;
+      border-radius: 14px;
+      padding: 18px;
+      font-size: 16px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #8b5cf6;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    select {
+      background: #08080d;
+      color: white;
+      border: 1px solid #30303d;
+      padding: 13px;
+      border-radius: 10px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: #7c3aed;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #6d28d9;
+    }
+
+    #status {
+      text-align: center;
+      margin-top: 20px;
+      color: #aaa;
+    }
+
+    .player {
+      margin-top: 25px;
+      padding: 20px;
+      background: #111119;
+      border: 1px solid #292936;
+      border-radius: 15px;
+      display: none;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 36px;
+      }
+
+      main {
+        margin-top: 40px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <h1>🎵 AI Music Generator</h1>
+  <header>
+    <div class="logo">🎵 AI Music</div>
+    <div class="badge">AI Music Generator</div>
+  </header>
 
-  <p>Create your own AI music</p>
+  <main>
 
-  <textarea
-    id="prompt"
-    placeholder="Describe the song you want..."
-    rows="5"
-    cols="50"></textarea>
+    <h1>Create Music With AI</h1>
 
-  <br><br>
+    <p class="subtitle">
+      Turn your idea into an original song.
+    </p>
 
-  <button id="generateBtn">Generate Song</button>
+    <div class="box">
 
-  <p id="status"></p>
+      <textarea
+        id="prompt"
+        placeholder="Example: A romantic Tamil melody about falling in love, emotional male vocals, cinematic music...">
+      </textarea>
+
+      <div class="controls">
+
+        <select id="language">
+          <option value="Tamil">Tamil</option>
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+        </select>
+
+        <select id="style">
+          <option value="Melody">Melody</option>
+          <option value="Folk">Folk</option>
+          <option value="Hip Hop">Hip Hop</option>
+          <option value="Rock">Rock</option>
+          <option value="Cinematic">Cinematic</option>
+        </select>
+
+      </div>
+
+      <button id="generateBtn">
+        🎵 Generate Song
+      </button>
+
+      <p id="status"></p>
+
+    </div>
+
+    <div class="player" id="player">
+
+      <h3>🎧 Your Song</h3>
+
+      <audio id="audioPlayer" controls></audio>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    const button = document.getElementById("generateBtn");
+    const status = document.getElementById("status");
+
+    button.addEventListener("click", function () {
+
+      const prompt = document.getElementById("prompt").value.trim();
+
+      if (!prompt) {
+        status.textContent = "Please describe your song first.";
+        return;
+      }
+
+      status.textContent = "Preparing your song...";
+
+    });
+
+  </script>
 
 </body>
 </html>
